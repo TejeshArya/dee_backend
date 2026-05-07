@@ -1,0 +1,35 @@
+## [Visual Studio]
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+
+## [Common]
+.vs/
+.idea/
+.vscode/
+*.swp
+*.bak
+*.tmp
+*.log
+
+## [User-specific files]
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## [Build results]
+[Bb]in/
+[Oo]bj/
+
+## [NuGet]
+packages/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+## [PostgreSQL/Local DB]
+*.db
+*.sqlite
