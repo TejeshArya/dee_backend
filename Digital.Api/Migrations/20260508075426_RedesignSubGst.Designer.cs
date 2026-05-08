@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260508075426_RedesignSubGst")]
+    partial class RedesignSubGst
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,117 +24,6 @@ namespace Digital.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Digital.Api.Models.Bank", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BankName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Banks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(6736),
-                            Description = "SBI"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(7254),
-                            Description = "HDFC"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(7256),
-                            Description = "ICICI"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(7257),
-                            Description = "CANARA"
-                        });
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.BankDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountHolder")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("AccountNo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("BankName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("BranchName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("EmpId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("IfscCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("MicrCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("SwiftCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BankDetails");
-                });
 
             modelBuilder.Entity("Digital.Api.Models.CompanyGst", b =>
                 {
@@ -201,62 +93,6 @@ namespace Digital.Api.Migrations
                     b.HasKey("GstNumber");
 
                     b.ToTable("CompanyGsts");
-
-                    b.HasData(
-                        new
-                        {
-                            GstNumber = "27AADCD1234A1Z1",
-                            City = "",
-                            CompanyAddress = "",
-                            CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(5344),
-                            DealsIn = "",
-                            Email = "contact@digital.com",
-                            GstStateCode = "",
-                            GstType = "GST",
-                            MobileNumber = "9876543210",
-                            PanNumber = "",
-                            PinCode = "",
-                            Remarks = "",
-                            StateName = "Maharashtra",
-                            TanNumber = ""
-                        },
-                        new
-                        {
-                            GstNumber = "27BBBDD4321B1Z2",
-                            City = "",
-                            CompanyAddress = "",
-                            CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(6207),
-                            DealsIn = "",
-                            Email = "info@techsolutions.com",
-                            GstStateCode = "",
-                            GstType = "GST",
-                            MobileNumber = "9988776655",
-                            PanNumber = "",
-                            PinCode = "",
-                            Remarks = "",
-                            StateName = "Karnataka",
-                            TanNumber = ""
-                        },
-                        new
-                        {
-                            GstNumber = "27CCCCD9999C1Z3",
-                            City = "",
-                            CompanyAddress = "",
-                            CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 8, 8, 4, 55, 445, DateTimeKind.Utc).AddTicks(6211),
-                            DealsIn = "",
-                            Email = "support@global.com",
-                            GstStateCode = "",
-                            GstType = "GST",
-                            MobileNumber = "9123456789",
-                            PanNumber = "",
-                            PinCode = "",
-                            Remarks = "",
-                            StateName = "Gujarat",
-                            TanNumber = ""
-                        });
                 });
 
             modelBuilder.Entity("Digital.Api.Models.DeliveryDetail", b =>
