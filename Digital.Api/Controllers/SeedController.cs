@@ -31,7 +31,7 @@ namespace Digital.Api.Controllers
                     DepartmentId = 1,
                     Role = "IT",
                     Status = "Active",
-                    CreatedAt = DateTime.Parse("2026-04-30")
+                    CreatedAt = DateTime.SpecifyKind(DateTime.Parse("2026-04-30"), DateTimeKind.Utc)
                 },
                 new Employee
                 {
@@ -42,7 +42,7 @@ namespace Digital.Api.Controllers
                     DepartmentId = 1,
                     Role = "ASSISTANT MANAGER",
                     Status = "Active",
-                    CreatedAt = DateTime.Parse("2026-04-13")
+                    CreatedAt = DateTime.SpecifyKind(DateTime.Parse("2026-04-13"), DateTimeKind.Utc)
                 },
                 new Employee
                 {
@@ -53,7 +53,7 @@ namespace Digital.Api.Controllers
                     DepartmentId = 2,
                     Role = "SENIOR MANAGER",
                     Status = "Active",
-                    CreatedAt = DateTime.Parse("2026-04-04")
+                    CreatedAt = DateTime.SpecifyKind(DateTime.Parse("2026-04-04"), DateTimeKind.Utc)
                 }
             };
 
@@ -82,8 +82,8 @@ namespace Digital.Api.Controllers
                     Client = "ACME CORP",
                     Gst = "00ABCDE1234...",
                     Value = "2,500,000",
-                    StartDate = DateTime.Parse("2024-04-20"),
-                    EndDate = DateTime.Parse("2024-10-20"),
+                    StartDate = DateTime.SpecifyKind(DateTime.Parse("2024-04-20"), DateTimeKind.Utc),
+                    EndDate = DateTime.SpecifyKind(DateTime.Parse("2024-10-20"), DateTimeKind.Utc),
                     Status = "In Progress",
                     Priority = "High",
                     Description = "Complete renovation of the 4th floor office space including new furniture, networking, and interior design."
@@ -100,8 +100,8 @@ namespace Digital.Api.Controllers
                     Client = "GLOBAL TECH",
                     Gst = "11FGHIJ5678...",
                     Value = "5,000,000",
-                    StartDate = DateTime.Parse("2024-05-01"),
-                    EndDate = DateTime.Parse("2024-12-31"),
+                    StartDate = DateTime.SpecifyKind(DateTime.Parse("2024-05-01"), DateTimeKind.Utc),
+                    EndDate = DateTime.SpecifyKind(DateTime.Parse("2024-12-31"), DateTimeKind.Utc),
                     Status = "Planning",
                     Priority = "Critical",
                     Description = "Upgrading the core server racks and cooling systems in Data Center A."
@@ -112,6 +112,26 @@ namespace Digital.Api.Controllers
             await _context.SaveChangesAsync();
 
             return Ok("Sample projects seeded successfully");
+        }
+        [HttpPost("companygsts")]
+        public async Task<IActionResult> SeedCompanyGst()
+        {
+            if (_context.CompanyGsts.Any()) return BadRequest("Database already seeded");
+
+            var companyGsts = new List<CompanyGst>
+            {
+                new CompanyGst { GstNumber = "33ANVES1111A1Z1", CompanyName = "INS ANVESH", StateName = "TAMIL NADU", MobileNumber = "8912578000", Email = "anvesh-navy@gov.in", GstStateCode = "33" },
+                new CompanyGst { GstNumber = "37COMNC1111A1Z1", CompanyName = "COMMUNICATION NETWORK CENTER", StateName = "ANDHRA PRADESH", MobileNumber = "8912812630", Email = "netwarcom_suff_csc@navy.mil", GstStateCode = "37" },
+                new CompanyGst { GstNumber = "27TABAR1111A1Z1", CompanyName = "INS TABAR", StateName = "MAHARASHTRA", MobileNumber = "9409520932", Email = "TABAR-NAVY@GOV.IN", GstStateCode = "27" },
+                new CompanyGst { GstNumber = "27BGIPG2942N1Z2", CompanyName = "FLEET MAINTENANCE UNIT MUMBAI", StateName = "MAHARASHTRA", MobileNumber = "9161224444", Email = "fmipl@fleetship.com", GstStateCode = "27" },
+                new CompanyGst { GstNumber = "20AAECC7652H1ZU", CompanyName = "Eekakshara Projects Pvt Ltd", StateName = "JHARKHAND", MobileNumber = "9234600666", Email = "jatz1986@gmail.com", GstStateCode = "20" },
+                new CompanyGst { GstNumber = "27WEDMA1111A1Z1", CompanyName = "WED MANKHURD", StateName = "MAHARASHTRA", MobileNumber = "9956562952", Email = "wed@navy.gov.in", GstStateCode = "27" }
+            };
+
+            _context.CompanyGsts.AddRange(companyGsts);
+            await _context.SaveChangesAsync();
+
+            return Ok("Sample companies seeded successfully");
         }
     }
 }

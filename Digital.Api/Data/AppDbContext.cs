@@ -14,6 +14,7 @@ namespace Digital.Api.Data
         public DbSet<Location> Locations { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CompanyGst> CompanyGsts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
