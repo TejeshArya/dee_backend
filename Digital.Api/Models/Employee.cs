@@ -5,7 +5,9 @@ namespace Digital.Api.Models
     public class Employee
     {
         [Key]
-        public string EmployeeId { get; set; } = string.Empty; // e.g., DEE300426132
+        public int Id { get; set; }
+
+        public string? EmployeeId { get; set; } // e.g., DEE300426132
         
         [Required]
         [MaxLength(100)]
@@ -24,6 +26,11 @@ namespace Digital.Api.Models
         public string Role { get; set; } = string.Empty;
         public string Status { get; set; } = "Active"; // Active, Pending, Rejected
         
+        public string? TemporaryPassword { get; set; }
+        public string? AnnualSalary { get; set; }
+        public string? Qualification { get; set; }
+        public string? Remarks { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
     }

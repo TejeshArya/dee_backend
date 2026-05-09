@@ -9,6 +9,12 @@ namespace Digital.Api.Data
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Suppress the warning about pending model changes
+            optionsBuilder.ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
+        }
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -19,6 +25,14 @@ namespace Digital.Api.Data
         public DbSet<SubGst> SubGsts { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<BankDetail> BankDetails { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<Quotation> Quotations { get; set; }
+        public DbSet<QuotationItem> QuotationItems { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<HsnCode> HsnCodes { get; set; }
+        public DbSet<Denomination> Denominations { get; set; }
+        public DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
+        public DbSet<PurchaseInvoiceItem> PurchaseInvoiceItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

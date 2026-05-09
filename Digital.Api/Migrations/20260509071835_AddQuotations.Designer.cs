@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260509071835_AddQuotations")]
+    partial class AddQuotations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(4442),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 293, DateTimeKind.Utc).AddTicks(2259),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(5083),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 293, DateTimeKind.Utc).AddTicks(3151),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(5085),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 293, DateTimeKind.Utc).AddTicks(3154),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(5086),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 293, DateTimeKind.Utc).AddTicks(3155),
                             Description = "CANARA"
                         });
                 });
@@ -124,34 +127,6 @@ namespace Digital.Api.Migrations
                     b.HasKey("EmpId");
 
                     b.ToTable("BankDetails");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhotoPath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.CompanyGst", b =>
@@ -230,7 +205,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(2790),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 292, DateTimeKind.Utc).AddTicks(9405),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             GstStateCode = "",
@@ -248,7 +223,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(3823),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 293, DateTimeKind.Utc).AddTicks(703),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             GstStateCode = "",
@@ -266,7 +241,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(3826),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 18, 35, 293, DateTimeKind.Utc).AddTicks(707),
                             DealsIn = "",
                             Email = "support@global.com",
                             GstStateCode = "",
@@ -327,23 +302,6 @@ namespace Digital.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeliveryDetails");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.Denomination", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Denominations");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.Department", b =>
@@ -493,27 +451,6 @@ namespace Digital.Api.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Digital.Api.Models.HsnCode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HsnCodes");
-                });
-
             modelBuilder.Entity("Digital.Api.Models.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -616,157 +553,6 @@ namespace Digital.Api.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Digital.Api.Models.PurchaseInvoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("AmountExclGst")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Designation")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ExpenseType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("InvoiceDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("InvoiceFilePath")
-                        .HasColumnType("text");
-
-                    b.Property<string>("InvoiceNo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("PaidAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("PanCard")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("RoundOff")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("TotalCgst")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("TotalIgst")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("TotalSgst")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PurchaseInvoices");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.PurchaseInvoiceItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Capacity")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Cgst")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("CostRate")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Denom")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Hsn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Igst")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Mrp")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("PurchaseInvoiceId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PurchaseType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("SellPrice")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("SerialNo")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Sgst")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Subcategory")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PurchaseInvoiceId");
-
-                    b.ToTable("PurchaseInvoiceItems");
-                });
-
             modelBuilder.Entity("Digital.Api.Models.Quotation", b =>
                 {
                     b.Property<int>("Id")
@@ -785,15 +571,7 @@ namespace Digital.Api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("DeliveryDays")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Department")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -814,10 +592,6 @@ namespace Digital.Api.Migrations
 
                     b.Property<DateTime?>("InvoiceDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Post")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("ProjectName")
                         .IsRequired()
@@ -851,10 +625,6 @@ namespace Digital.Api.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("WarrantyDays")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Wing")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -1021,15 +791,6 @@ namespace Digital.Api.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("Digital.Api.Models.PurchaseInvoiceItem", b =>
-                {
-                    b.HasOne("Digital.Api.Models.PurchaseInvoice", null)
-                        .WithMany("Items")
-                        .HasForeignKey("PurchaseInvoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Digital.Api.Models.QuotationItem", b =>
                 {
                     b.HasOne("Digital.Api.Models.Quotation", null)
@@ -1047,11 +808,6 @@ namespace Digital.Api.Migrations
             modelBuilder.Entity("Digital.Api.Models.Location", b =>
                 {
                     b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.PurchaseInvoice", b =>
-                {
-                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.Quotation", b =>

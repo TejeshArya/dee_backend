@@ -5,8 +5,7 @@ namespace Digital.Api.Models
     public class BankDetail
     {
         [Key]
-        public int Id { get; set; }
-
+        [Required]
         public string EmpId { get; set; } = string.Empty;
         public string CompanyName { get; set; } = string.Empty;
         public string BankName { get; set; } = string.Empty;

@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260509073856_AddPurchaseInvoices")]
+    partial class AddPurchaseInvoices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(4442),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(5718),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(5083),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(6360),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(5085),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(6361),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(5086),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(6362),
                             Description = "CANARA"
                         });
                 });
@@ -230,7 +233,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(2790),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(3999),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             GstStateCode = "",
@@ -248,7 +251,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(3823),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(5080),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             GstStateCode = "",
@@ -266,7 +269,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 9, 7, 46, 13, 19, DateTimeKind.Utc).AddTicks(3826),
+                            CreatedAt = new DateTime(2026, 5, 9, 7, 38, 55, 462, DateTimeKind.Utc).AddTicks(5082),
                             DealsIn = "",
                             Email = "support@global.com",
                             GstStateCode = "",
@@ -651,9 +654,6 @@ namespace Digital.Api.Migrations
                     b.Property<string>("InvoiceNo")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal>("PaidAmount")
-                        .HasColumnType("numeric");
 
                     b.Property<string>("PanCard")
                         .IsRequired()

@@ -27,6 +27,7 @@ namespace Digital.Api.Models
         public string Priority { get; set; } = "Medium"; // Low, Medium, High, Critical
         
         public string Description { get; set; } = string.Empty;
+        public string FilePath { get; set; } = string.Empty;
         
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

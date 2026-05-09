@@ -29,14 +29,14 @@ namespace Digital.Api.Controllers
         {
             _context.BankDetails.Add(bankDetail);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetBankDetails), new { id = bankDetail.Id }, bankDetail);
+            return CreatedAtAction(nameof(GetBankDetails), new { id = bankDetail.EmpId }, bankDetail);
         }
 
         // POST: api/BankDetails/edit
         [HttpPost("edit")]
         public async Task<IActionResult> EditBankDetail(BankDetail bankDetail)
         {
-            var existing = await _context.BankDetails.FindAsync(bankDetail.Id);
+            var existing = await _context.BankDetails.FindAsync(bankDetail.EmpId);
             if (existing == null) return NotFound();
 
             _context.Entry(existing).CurrentValues.SetValues(bankDetail);
@@ -46,7 +46,7 @@ namespace Digital.Api.Controllers
 
         // DELETE: api/BankDetails/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBankDetail(int id)
+        public async Task<IActionResult> DeleteBankDetail(string id)
         {
             var bankDetail = await _context.BankDetails.FindAsync(id);
             if (bankDetail == null) return NotFound();
