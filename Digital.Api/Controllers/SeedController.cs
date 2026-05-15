@@ -133,5 +133,120 @@ namespace Digital.Api.Controllers
 
             return Ok("Sample companies seeded successfully");
         }
+
+        [HttpPost("salesinvoices")]
+        public async Task<IActionResult> SeedSalesInvoices()
+        {
+            _context.SalesInvoices.RemoveRange(_context.SalesInvoices);
+            await _context.SaveChangesAsync();
+            
+            var invoices = new List<SalesInvoice>
+            {
+                new SalesInvoice
+                {
+                    ClientName = "INS TAMAL",
+                    InvoiceNo = "DEE2627110",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-05-14"), DateTimeKind.Utc),
+                    Amount = 44750.00m,
+                    GstAmount = 2237.50m,
+                    TotalAmount = 46987.50m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "INS TAMAL",
+                    InvoiceNo = "DEE2627109",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-05-14"), DateTimeKind.Utc),
+                    Amount = 45700.00m,
+                    GstAmount = 2285.00m,
+                    TotalAmount = 47985.00m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "INS TAMAL",
+                    InvoiceNo = "DEE2627108",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-05-14"), DateTimeKind.Utc),
+                    Amount = 330000.00m,
+                    GstAmount = 16500.00m,
+                    TotalAmount = 346500.00m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "FLEET MAINTENANCE UNIT VISAKHAPATNAM",
+                    InvoiceNo = "DEE2627104",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-04-02"), DateTimeKind.Utc),
+                    Amount = 231860.00m,
+                    GstAmount = 11593.00m,
+                    TotalAmount = 243453.00m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "THE ADMIRAL SUPERINTENDANT OF NAVAL DOCKYARD (VISAKHAPATNAM)",
+                    InvoiceNo = "DEE2627101",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-04-01"), DateTimeKind.Utc),
+                    Amount = 363808.00m,
+                    GstAmount = 18190.40m,
+                    TotalAmount = 381998.40m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "FLEET MAINTENANCE UNIT VISAKHAPATNAM",
+                    InvoiceNo = "DEE2627103",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-05-01"), DateTimeKind.Utc),
+                    Amount = 138214.24m,
+                    GstAmount = 6910.71m,
+                    TotalAmount = 145124.95m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "FLEET MAINTENANCE UNIT VISAKHAPATNAM",
+                    InvoiceNo = "DEE2627102",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-04-02"), DateTimeKind.Utc),
+                    Amount = 138214.24m,
+                    GstAmount = 6910.71m,
+                    TotalAmount = 145124.95m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "INS TAMAL",
+                    InvoiceNo = "DEE2627107",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-05-14"), DateTimeKind.Utc),
+                    Amount = 120000.00m,
+                    GstAmount = 6000.00m,
+                    TotalAmount = 126000.00m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                },
+                new SalesInvoice
+                {
+                    ClientName = "INS TAMAL",
+                    InvoiceNo = "DEE2627106",
+                    InvoiceDate = DateTime.SpecifyKind(DateTime.Parse("2026-05-14"), DateTimeKind.Utc),
+                    Amount = 95000.00m,
+                    GstAmount = 4750.00m,
+                    TotalAmount = 99750.00m,
+                    PayAmount = 0.00m,
+                    Status = "Pending"
+                }
+            };
+
+            _context.SalesInvoices.AddRange(invoices);
+            await _context.SaveChangesAsync();
+
+            return Ok("Sample sales invoices seeded successfully");
+        }
     }
 }

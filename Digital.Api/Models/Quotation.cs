@@ -22,6 +22,8 @@ namespace Digital.Api.Models
         public DateTime? InquiryDate { get; set; }
         public string Remarks { get; set; } = string.Empty;
         public string GstType { get; set; } = string.Empty;
+        public string Subject { get; set; } = string.Empty;
+        public string Status { get; set; } = "Pending"; // Pending, Approved, Rejected
         
         public decimal TotalIgst { get; set; }
         public decimal TotalCgst { get; set; }

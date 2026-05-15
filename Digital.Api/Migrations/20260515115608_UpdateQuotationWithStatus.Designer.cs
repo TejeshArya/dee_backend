@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260515115608_UpdateQuotationWithStatus")]
+    partial class UpdateQuotationWithStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(2945),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 424, DateTimeKind.Utc).AddTicks(309),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(3631),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 424, DateTimeKind.Utc).AddTicks(866),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(3632),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 424, DateTimeKind.Utc).AddTicks(867),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(3633),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 424, DateTimeKind.Utc).AddTicks(868),
                             Description = "CANARA"
                         });
                 });
@@ -230,7 +233,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(1435),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 423, DateTimeKind.Utc).AddTicks(8825),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             GstStateCode = "",
@@ -248,7 +251,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(2291),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 423, DateTimeKind.Utc).AddTicks(9793),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             GstStateCode = "",
@@ -266,7 +269,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 15, 12, 6, 0, 797, DateTimeKind.Utc).AddTicks(2294),
+                            CreatedAt = new DateTime(2026, 5, 15, 11, 56, 7, 423, DateTimeKind.Utc).AddTicks(9795),
                             DealsIn = "",
                             Email = "support@global.com",
                             GstStateCode = "",
