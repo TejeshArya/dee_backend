@@ -30,6 +30,6 @@ namespace Digital.Api.Controllers
         public async Task<ActionResult<IEnumerable<Denomination>>> GetDenominations()
         {
             return await _context.Denominations.ToListAsync();
-        }
+        }    
     }
 }

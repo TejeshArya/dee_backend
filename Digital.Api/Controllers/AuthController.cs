@@ -22,6 +22,7 @@ namespace Digital.Api.Controllers
             // IMPORTANT: In a real app, use BCrypt or similar to verify password hashes!
             // For this demo, we'll do a simple string comparison for speed.
             var user = await _context.Users
+                .Include(u => u.Role)
                 .FirstOrDefaultAsync(u => u.Email == request.Email && u.PasswordHash == request.Password);
 
             if (user == null)
@@ -37,7 +38,8 @@ namespace Digital.Api.Controllers
                 {
                     user.Email,
                     user.FullName,
-                    user.Role
+                    user.RoleId,
+                    RoleName = user.Role?.Name ?? "User"
                 }
             });
         }

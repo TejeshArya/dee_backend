@@ -248,5 +248,87 @@ namespace Digital.Api.Controllers
 
             return Ok("Sample sales invoices seeded successfully");
         }
+
+        [HttpPost("users")]
+        public async Task<IActionResult> SeedUsers()
+        {
+            if (_context.Users.Any()) return BadRequest("Users already exist");
+
+            var users = new List<User>
+            {
+                new User 
+                { 
+                    Email = "admin@digital.com", 
+                    PasswordHash = "Admin@123", 
+                    FullName = "System Administrator", 
+                    RoleId = 1 
+                },
+                new User 
+                { 
+                    Email = "hr@digital.com", 
+                    PasswordHash = "HR@123", 
+                    FullName = "HR Manager", 
+                    RoleId = 4 
+                },
+                new User 
+                { 
+                    Email = "it@digital.com", 
+                    PasswordHash = "IT@123", 
+                    FullName = "IT Lead", 
+                    RoleId = 5 
+                }
+            };
+
+            _context.Users.AddRange(users);
+            await _context.SaveChangesAsync();
+
+            return Ok("Sample users seeded successfully");
+        }
+
+        [HttpPost("masterdata")]
+        public async Task<IActionResult> SeedMasterData()
+        {
+            if (_context.MasterData.Any()) return BadRequest("Master data already exist");
+
+            var masterData = new List<MasterData>
+            {
+                new MasterData { Category = "Payment Mode", Value = "GPAY", Description = "GPAY" },
+                new MasterData { Category = "Payment Mode", Value = "ONLINE TRANSFER", Description = "ONLINE TRANSFER" },
+                new MasterData { Category = "Payment Mode", Value = "CHEQUE PAYMENT", Description = "CHEQUE PAYMENT" },
+                new MasterData { Category = "Payment Mode", Value = "CASH PAYMENT", Description = "CASH PAYMENT" },
+                new MasterData { Category = "Payment Mode", Value = "PHONEPE", Description = "PHONEPE" },
+                
+                new MasterData { Category = "State", Value = "ANDHRA PRADESH" },
+                new MasterData { Category = "State", Value = "MAHARASHTRA" },
+                new MasterData { Category = "State", Value = "TAMIL NADU" },
+                
+                new MasterData { Category = "Expense", Value = "FUEL" },
+                new MasterData { Category = "Expense", Value = "MAINTENANCE" },
+                new MasterData { Category = "Expense", Value = "SALARY" },
+
+                new MasterData { Category = "Category", Value = "HARDWARE", Description = "Computer Hardware" },
+                new MasterData { Category = "Category", Value = "SOFTWARE", Description = "Software Licenses" },
+                new MasterData { Category = "Category", Value = "FURNITURE", Description = "Office Furniture" },
+
+                new MasterData { Category = "Brand", Value = "DELL", Description = "Dell Computers" },
+                new MasterData { Category = "Brand", Value = "HP", Description = "HP Laptops" },
+                new MasterData { Category = "Brand", Value = "LOGITECH", Description = "Logitech Accessories" },
+
+                new MasterData { Category = "Sub Category", Value = "LAPTOPS", Description = "Portable Computers" },
+                new MasterData { Category = "Sub Category", Value = "MONITORS", Description = "Computer Displays" },
+
+                new MasterData { Category = "Post", Value = "DEVELOPER", Description = "Software Developer" },
+                new MasterData { Category = "Post", Value = "MANAGER", Description = "Project Manager" },
+                new MasterData { Category = "Post", Value = "ACCOUNTANT", Description = "Finance Team" },
+
+                new MasterData { Category = "Location", Value = "OFFICE A", Description = "Main Office" },
+                new MasterData { Category = "Location", Value = "WAREHOUSE", Description = "Primary Storage" }
+            };
+
+            _context.MasterData.AddRange(masterData);
+            await _context.SaveChangesAsync();
+
+            return Ok("Sample master data seeded successfully");
+        }
     }
 }

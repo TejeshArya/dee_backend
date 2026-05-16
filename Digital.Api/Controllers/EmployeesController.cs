@@ -100,7 +100,7 @@ namespace Digital.Api.Controllers
                 Email = employee.Email,
                 PasswordHash = employee.TemporaryPassword ?? "Welcome@123",
                 FullName = employee.Name,
-                Role = "User",
+                RoleId = 18,
                 CreatedAt = DateTime.UtcNow
             };
 

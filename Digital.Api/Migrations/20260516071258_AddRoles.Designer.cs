@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260516071258_AddRoles")]
+    partial class AddRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(8793),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(4864),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(9404),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(5492),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(9406),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(5493),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(9407),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(5495),
                             Description = "CANARA"
                         });
                 });
@@ -230,7 +233,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(7238),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(3503),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             GstStateCode = "",
@@ -248,7 +251,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(8224),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(4371),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             GstStateCode = "",
@@ -266,7 +269,7 @@ namespace Digital.Api.Migrations
                             City = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 16, 8, 24, 36, 588, DateTimeKind.Utc).AddTicks(8226),
+                            CreatedAt = new DateTime(2026, 5, 16, 7, 12, 57, 299, DateTimeKind.Utc).AddTicks(4373),
                             DealsIn = "",
                             Email = "support@global.com",
                             GstStateCode = "",
@@ -542,51 +545,6 @@ namespace Digital.Api.Migrations
                             Id = 2,
                             Name = "JAMNAGAR"
                         });
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.MasterData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhotoPath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MasterData");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.Project", b =>
