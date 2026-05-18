@@ -330,5 +330,51 @@ namespace Digital.Api.Controllers
 
             return Ok("Sample master data seeded successfully");
         }
+
+        [HttpPost("document-categories")]
+        public async Task<IActionResult> SeedDocumentCategories()
+        {
+            var existing = _context.MasterData.Where(m => 
+                m.Category == "Document Category" || 
+                m.Category == "Sub Document Category" || 
+                m.Category == "Sub-Sub Document Category" ||
+                m.Category == "Sub Sub Document Category"
+            );
+            _context.MasterData.RemoveRange(existing);
+            await _context.SaveChangesAsync();
+
+            var catFinance = new MasterData { Category = "Document Category", Value = "FINANCIAL DOCUMENTS", Description = "Company Financials, Tax and Accounts" };
+            var catTechnical = new MasterData { Category = "Document Category", Value = "TECHNICAL DOCUMENTS", Description = "System Architecture and Source Code Diagrams" };
+            var catLegal = new MasterData { Category = "Document Category", Value = "LEGAL DOCUMENTS", Description = "NDA, SLA, Contracts and Compliance" };
+            var catHr = new MasterData { Category = "Document Category", Value = "HUMAN RESOURCES", Description = "Offer Letters and Employee Profiles" };
+
+            _context.MasterData.AddRange(catFinance, catTechnical, catLegal, catHr);
+            await _context.SaveChangesAsync();
+
+            var subTax = new MasterData { Category = "Sub Document Category", Value = "TAX FILINGS", ParentId = catFinance.Id, Description = "GST and Income Tax filings" };
+            var subInvoice = new MasterData { Category = "Sub Document Category", Value = "INVOICES & BILLS", ParentId = catFinance.Id, Description = "Client and Vendor Invoices" };
+            var subDiagram = new MasterData { Category = "Sub Document Category", Value = "SYSTEM DIAGRAMS", ParentId = catTechnical.Id, Description = "Database and Network Blueprints" };
+            var subContracts = new MasterData { Category = "Sub Document Category", Value = "CLIENT CONTRACTS", ParentId = catLegal.Id, Description = "Signed service level agreements" };
+
+            _context.MasterData.AddRange(subTax, subInvoice, subDiagram, subContracts);
+            await _context.SaveChangesAsync();
+
+            var subSubGst = new MasterData { Category = "Sub-Sub Document Category", Value = "GST RETURNS", ParentId = subTax.Id, Description = "GSTR-1 and GSTR-3B filings" };
+            var subSubIncomeTax = new MasterData { Category = "Sub-Sub Document Category", Value = "INCOME TAX RETURNS", ParentId = subTax.Id, Description = "ITR filings" };
+            var subSubSalesInv = new MasterData { Category = "Sub-Sub Document Category", Value = "SALES INVOICES", ParentId = subInvoice.Id, Description = "Invoices sent to customers" };
+            var subSubPurchaseInv = new MasterData { Category = "Sub-Sub Document Category", Value = "PURCHASE INVOICES", ParentId = subInvoice.Id, Description = "Invoices received from suppliers" };
+            var subSubSchemas = new MasterData { Category = "Sub-Sub Document Category", Value = "DATABASE SCHEMAS", ParentId = subDiagram.Id, Description = "PostgreSQL and MySQL entity diagrams" };
+
+            var subSubGstAlt = new MasterData { Category = "Sub Sub Document Category", Value = "GST RETURNS", ParentId = subTax.Id, Description = "GSTR-1 and GSTR-3B filings" };
+            var subSubIncomeTaxAlt = new MasterData { Category = "Sub Sub Document Category", Value = "INCOME TAX RETURNS", ParentId = subTax.Id, Description = "ITR filings" };
+            var subSubSalesInvAlt = new MasterData { Category = "Sub Sub Document Category", Value = "SALES INVOICES", ParentId = subInvoice.Id, Description = "Invoices sent to customers" };
+            var subSubPurchaseInvAlt = new MasterData { Category = "Sub Sub Document Category", Value = "PURCHASE INVOICES", ParentId = subInvoice.Id, Description = "Invoices received from suppliers" };
+            var subSubSchemasAlt = new MasterData { Category = "Sub Sub Document Category", Value = "DATABASE SCHEMAS", ParentId = subDiagram.Id, Description = "PostgreSQL and MySQL entity diagrams" };
+
+            _context.MasterData.AddRange(subSubGst, subSubIncomeTax, subSubSalesInv, subSubPurchaseInv, subSubSchemas, subSubGstAlt, subSubIncomeTaxAlt, subSubSalesInvAlt, subSubPurchaseInvAlt, subSubSchemasAlt);
+            await _context.SaveChangesAsync();
+
+            return Ok("Sample Document, Sub-Document, and Sub-Sub Document Categories seeded successfully");
+        }
     }
 }

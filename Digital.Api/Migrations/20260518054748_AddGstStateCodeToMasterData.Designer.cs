@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260518054748_AddGstStateCodeToMasterData")]
+    partial class AddGstStateCodeToMasterData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 232, DateTimeKind.Utc).AddTicks(206),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(7253),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 232, DateTimeKind.Utc).AddTicks(766),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(7802),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 232, DateTimeKind.Utc).AddTicks(767),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(7804),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 232, DateTimeKind.Utc).AddTicks(768),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(7805),
                             Description = "CANARA"
                         });
                 });
@@ -164,10 +167,6 @@ namespace Digital.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("CompanyAddress")
                         .IsRequired()
                         .HasColumnType("text");
@@ -191,23 +190,11 @@ namespace Digital.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FooterPath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("GstStateCode")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("GstType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("HeaderPath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LogoPath")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -224,10 +211,6 @@ namespace Digital.Api.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Remarks")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("SecondaryMobileNo")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -248,22 +231,17 @@ namespace Digital.Api.Migrations
                         {
                             GstNumber = "27AADCD1234A1Z1",
                             City = "",
-                            Color = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 231, DateTimeKind.Utc).AddTicks(8751),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(5679),
                             DealsIn = "",
                             Email = "contact@digital.com",
-                            FooterPath = "",
                             GstStateCode = "",
                             GstType = "GST",
-                            HeaderPath = "",
-                            LogoPath = "",
                             MobileNumber = "9876543210",
                             PanNumber = "",
                             PinCode = "",
                             Remarks = "",
-                            SecondaryMobileNo = "",
                             StateName = "Maharashtra",
                             TanNumber = ""
                         },
@@ -271,22 +249,17 @@ namespace Digital.Api.Migrations
                         {
                             GstNumber = "27BBBDD4321B1Z2",
                             City = "",
-                            Color = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 231, DateTimeKind.Utc).AddTicks(9690),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(6667),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
-                            FooterPath = "",
                             GstStateCode = "",
                             GstType = "GST",
-                            HeaderPath = "",
-                            LogoPath = "",
                             MobileNumber = "9988776655",
                             PanNumber = "",
                             PinCode = "",
                             Remarks = "",
-                            SecondaryMobileNo = "",
                             StateName = "Karnataka",
                             TanNumber = ""
                         },
@@ -294,22 +267,17 @@ namespace Digital.Api.Migrations
                         {
                             GstNumber = "27CCCCD9999C1Z3",
                             City = "",
-                            Color = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 18, 6, 22, 17, 231, DateTimeKind.Utc).AddTicks(9691),
+                            CreatedAt = new DateTime(2026, 5, 18, 5, 47, 48, 77, DateTimeKind.Utc).AddTicks(6669),
                             DealsIn = "",
                             Email = "support@global.com",
-                            FooterPath = "",
                             GstStateCode = "",
                             GstType = "GST",
-                            HeaderPath = "",
-                            LogoPath = "",
                             MobileNumber = "9123456789",
                             PanNumber = "",
                             PinCode = "",
                             Remarks = "",
-                            SecondaryMobileNo = "",
                             StateName = "Gujarat",
                             TanNumber = ""
                         });

@@ -28,6 +28,17 @@ namespace Digital.Api.Controllers
         public async Task<ActionResult<SubGst>> PostSubGst(SubGst subGst)
         {
             _context.SubGsts.Add(subGst);
+
+            if (!string.IsNullOrWhiteSpace(subGst.Department) && !string.IsNullOrWhiteSpace(subGst.OfficerName))
+            {
+                string deptOfficerName = $"{subGst.Department.Trim()} - {subGst.OfficerName.Trim()}";
+                var exists = await _context.Departments.AnyAsync(d => d.Name.ToLower() == deptOfficerName.ToLower());
+                if (!exists)
+                {
+                    _context.Departments.Add(new Department { Name = deptOfficerName });
+                }
+            }
+
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetSubGsts), new { id = subGst.Id }, subGst);
         }
@@ -40,6 +51,17 @@ namespace Digital.Api.Controllers
             if (existing == null) return NotFound();
 
             _context.Entry(existing).CurrentValues.SetValues(subGst);
+
+            if (!string.IsNullOrWhiteSpace(subGst.Department) && !string.IsNullOrWhiteSpace(subGst.OfficerName))
+            {
+                string deptOfficerName = $"{subGst.Department.Trim()} - {subGst.OfficerName.Trim()}";
+                var exists = await _context.Departments.AnyAsync(d => d.Name.ToLower() == deptOfficerName.ToLower());
+                if (!exists)
+                {
+                    _context.Departments.Add(new Department { Name = deptOfficerName });
+                }
+            }
+
             await _context.SaveChangesAsync();
             return Ok(existing);
         }

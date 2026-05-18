@@ -27,6 +27,12 @@ namespace Digital.Api.Models
         public string GstType { get; set; } = "GST";
         public string DealsIn { get; set; } = string.Empty;
 
+        public string SecondaryMobileNo { get; set; } = string.Empty;
+        public string Color { get; set; } = string.Empty;
+        public string LogoPath { get; set; } = string.Empty;
+        public string HeaderPath { get; set; } = string.Empty;
+        public string FooterPath { get; set; } = string.Empty;
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }
