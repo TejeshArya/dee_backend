@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260519073955_AddDesignationFieldAndTable")]
+    partial class AddDesignationFieldAndTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(6324),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(7223),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(6913),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(7783),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(6914),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(7784),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(6915),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(7785),
                             Description = "CANARA"
                         });
                 });
@@ -251,7 +254,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(4768),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(5259),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             FooterPath = "",
@@ -274,7 +277,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(5764),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(6573),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             FooterPath = "",
@@ -297,7 +300,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 19, 8, 22, 0, 759, DateTimeKind.Utc).AddTicks(5766),
+                            CreatedAt = new DateTime(2026, 5, 19, 7, 39, 54, 316, DateTimeKind.Utc).AddTicks(6576),
                             DealsIn = "",
                             Email = "support@global.com",
                             FooterPath = "",
@@ -389,18 +392,12 @@ namespace Digital.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CompanyGstNumber")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyGstNumber");
 
                     b.ToTable("Departments");
 
@@ -433,16 +430,10 @@ namespace Digital.Api.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("DesignationName")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
-
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("MobileNumber")
                         .IsRequired()
@@ -459,15 +450,10 @@ namespace Digital.Api.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("Status")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
 
                     b.ToTable("DesignationOfficers");
                 });
@@ -540,9 +526,6 @@ namespace Digital.Api.Migrations
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("DesignationOfficerId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -581,8 +564,6 @@ namespace Digital.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("DesignationOfficerId");
 
                     b.HasIndex("LocationId");
 
@@ -1430,41 +1411,17 @@ namespace Digital.Api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Digital.Api.Models.Department", b =>
-                {
-                    b.HasOne("Digital.Api.Models.CompanyGst", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyGstNumber");
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.DesignationOfficer", b =>
-                {
-                    b.HasOne("Digital.Api.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
-
-                    b.Navigation("Department");
-                });
-
             modelBuilder.Entity("Digital.Api.Models.Employee", b =>
                 {
                     b.HasOne("Digital.Api.Models.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId");
 
-                    b.HasOne("Digital.Api.Models.DesignationOfficer", "DesignationOfficer")
-                        .WithMany()
-                        .HasForeignKey("DesignationOfficerId");
-
                     b.HasOne("Digital.Api.Models.Location", "Location")
                         .WithMany("Employees")
                         .HasForeignKey("LocationId");
 
                     b.Navigation("Department");
-
-                    b.Navigation("DesignationOfficer");
 
                     b.Navigation("Location");
                 });

@@ -20,22 +20,40 @@ namespace Digital.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SubGst>>> GetSubGsts()
         {
-            return await _context.SubGsts.OrderByDescending(s => s.CreatedAt).ToListAsync();
+            var list = await _context.SubGsts.OrderByDescending(s => s.CreatedAt).ToListAsync();
+            bool changed = false;
+            foreach (var item in list)
+            {
+                var combined = string.IsNullOrEmpty(item.Designation) ? $"{item.Department.Trim()} - {item.OfficerName.Trim()}" : $"{item.Department.Trim()} - {item.Designation.Trim()} - {item.OfficerName.Trim()}";
+                if (item.DepartmentOfficer != combined)
+                {
+                    item.DepartmentOfficer = combined;
+                    _context.Entry(item).State = EntityState.Modified;
+                    changed = true;
+                }
+            }
+            if (changed)
+            {
+                await _context.SaveChangesAsync();
+            }
+            return list;
         }
 
         // POST: api/SubGsts
         [HttpPost]
         public async Task<ActionResult<SubGst>> PostSubGst(SubGst subGst)
         {
+            var combined = string.IsNullOrEmpty(subGst.Designation) ? $"{subGst.Department.Trim()} - {subGst.OfficerName.Trim()}" : $"{subGst.Department.Trim()} - {subGst.Designation.Trim()} - {subGst.OfficerName.Trim()}";
+            subGst.DepartmentOfficer = combined;
+
             _context.SubGsts.Add(subGst);
 
             if (!string.IsNullOrWhiteSpace(subGst.Department) && !string.IsNullOrWhiteSpace(subGst.OfficerName))
             {
-                string deptOfficerName = $"{subGst.Department.Trim()} - {subGst.OfficerName.Trim()}";
-                var exists = await _context.Departments.AnyAsync(d => d.Name.ToLower() == deptOfficerName.ToLower());
+                var exists = await _context.Departments.AnyAsync(d => d.Name.ToLower() == combined.ToLower());
                 if (!exists)
                 {
-                    _context.Departments.Add(new Department { Name = deptOfficerName });
+                    _context.Departments.Add(new Department { Name = combined });
                 }
             }
 
@@ -50,15 +68,17 @@ namespace Digital.Api.Controllers
             var existing = await _context.SubGsts.FindAsync(subGst.Id);
             if (existing == null) return NotFound();
 
+            var combined = string.IsNullOrEmpty(subGst.Designation) ? $"{subGst.Department.Trim()} - {subGst.OfficerName.Trim()}" : $"{subGst.Department.Trim()} - {subGst.Designation.Trim()} - {subGst.OfficerName.Trim()}";
+            subGst.DepartmentOfficer = combined;
+
             _context.Entry(existing).CurrentValues.SetValues(subGst);
 
             if (!string.IsNullOrWhiteSpace(subGst.Department) && !string.IsNullOrWhiteSpace(subGst.OfficerName))
             {
-                string deptOfficerName = $"{subGst.Department.Trim()} - {subGst.OfficerName.Trim()}";
-                var exists = await _context.Departments.AnyAsync(d => d.Name.ToLower() == deptOfficerName.ToLower());
+                var exists = await _context.Departments.AnyAsync(d => d.Name.ToLower() == combined.ToLower());
                 if (!exists)
                 {
-                    _context.Departments.Add(new Department { Name = deptOfficerName });
+                    _context.Departments.Add(new Department { Name = combined });
                 }
             }
 

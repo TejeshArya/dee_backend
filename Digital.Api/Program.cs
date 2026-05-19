@@ -2,6 +2,8 @@ using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

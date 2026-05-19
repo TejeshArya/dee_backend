@@ -24,6 +24,7 @@ namespace Digital.Api.Data
         public DbSet<CompanyGst> CompanyGsts { get; set; }
         public DbSet<DeliveryDetail> DeliveryDetails { get; set; }
         public DbSet<SubGst> SubGsts { get; set; }
+        public DbSet<DesignationOfficer> DesignationOfficers { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<BankDetail> BankDetails { get; set; }
         public DbSet<Document> Documents { get; set; }
@@ -44,9 +45,9 @@ namespace Digital.Api.Data
 
             // Seed initial data if needed
             modelBuilder.Entity<Department>().HasData(
-                new Department { Id = 1, Name = "P & P" },
-                new Department { Id = 2, Name = "CIVIL DEPARTMENT" },
-                new Department { Id = 3, Name = "IT" }
+                new Department { Id = 1, Name = "P & P", CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 2, Name = "CIVIL DEPARTMENT", CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 3, Name = "IT", CompanyGstNumber = "27AADCD1234A1Z1" }
             );
 
             modelBuilder.Entity<Location>().HasData(

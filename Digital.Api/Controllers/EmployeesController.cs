@@ -23,6 +23,7 @@ namespace Digital.Api.Controllers
             return await _context.Employees
                 .Include(e => e.Department)
                 .Include(e => e.Location)
+                .Include(e => e.DesignationOfficer)
                 .ToListAsync();
         }
 

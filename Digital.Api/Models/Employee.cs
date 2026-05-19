@@ -19,6 +19,11 @@ namespace Digital.Api.Models
         
         public int? DepartmentId { get; set; }
         public Department? Department { get; set; }
+
+        public int? DesignationOfficerId { get; set; }
+        
+        [System.Text.Json.Serialization.JsonIgnore]
+        public DesignationOfficer? DesignationOfficer { get; set; }
         
         public int? LocationId { get; set; }
         public Location? Location { get; set; }
