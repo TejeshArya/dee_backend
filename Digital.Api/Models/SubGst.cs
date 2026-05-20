@@ -20,6 +20,9 @@ namespace Digital.Api.Models
         public string Remarks { get; set; } = string.Empty;
         public bool Status { get; set; } = true;
 
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }
