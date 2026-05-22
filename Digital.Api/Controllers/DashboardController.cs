@@ -19,86 +19,77 @@ namespace Digital.Api.Controllers
             _context = context;
         }
 
+        // GET: api/dashboard/stats  — Main dashboard overview
         [HttpGet("stats")]
         public async Task<IActionResult> GetStats()
         {
             var totalEmployees = await _context.Employees.CountAsync();
             var totalProjects = await _context.Projects.CountAsync();
-            
-            // Real calculated revenue from sales invoices
-            var revenue = await _context.SalesInvoices.AnyAsync() 
+
+            var revenue = await _context.SalesInvoices.AnyAsync()
                 ? await _context.SalesInvoices.SumAsync(s => s.TotalAmount)
-                : 1245000; // fallback default if empty
-                
-            // Real pending items count: quotations pending + sales invoices pending + employees pending IT approval
+                : 1245000;
+
             var pendingQuotations = await _context.Quotations.CountAsync(q => q.Status == "Pending");
             var pendingSalesInvoices = await _context.SalesInvoices.CountAsync(s => s.Status == "Pending");
             var pendingEmployees = await _context.Employees.CountAsync(e => e.Status == "Pending");
             var pendingTasks = pendingQuotations + pendingSalesInvoices + pendingEmployees;
 
-            // Invoices due count
             var invoicesDue = await _context.SalesInvoices.CountAsync(s => s.Status == "Pending");
-            if (invoicesDue == 0) invoicesDue = 7; // fallback default if empty
+            if (invoicesDue == 0) invoicesDue = 7;
 
-            // Total companies registered
             var totalCompanies = await _context.CompanyGsts.CountAsync();
 
-            // Total purchases
             var totalPurchases = await _context.PurchaseInvoices.AnyAsync()
                 ? await _context.PurchaseInvoices.SumAsync(p => p.TotalAmount)
                 : 345000;
 
-            // Build dynamic recent activities
             var activities = new List<dynamic>();
 
-            // Get recent employees
             var recentEmployees = await _context.Employees
                 .OrderByDescending(e => e.CreatedAt)
                 .Take(3)
-                .Select(e => new { 
-                    Action = $"New employee onboarding: {e.Name}", 
-                    User = e.Role, 
-                    Time = e.CreatedAt, 
-                    Type = "hr" 
+                .Select(e => new {
+                    Action = $"New employee onboarding: {e.Name}",
+                    User = e.Role,
+                    Time = e.CreatedAt,
+                    Type = "hr"
                 })
                 .ToListAsync();
             activities.AddRange(recentEmployees);
 
-            // Get recent projects
             var recentProjects = await _context.Projects
                 .OrderByDescending(p => p.CreatedAt)
                 .Take(3)
-                .Select(p => new { 
-                    Action = $"New project '{p.Name}' created", 
-                    User = p.CreatedBy, 
-                    Time = p.CreatedAt, 
-                    Type = "project" 
+                .Select(p => new {
+                    Action = $"New project '{p.Name}' created",
+                    User = p.CreatedBy,
+                    Time = p.CreatedAt,
+                    Type = "project"
                 })
                 .ToListAsync();
             activities.AddRange(recentProjects);
 
-            // Get recent sales invoices
             var recentSales = await _context.SalesInvoices
                 .OrderByDescending(s => s.CreatedAt)
                 .Take(3)
-                .Select(s => new { 
-                    Action = $"Sales Invoice #{s.InvoiceNo} generated", 
-                    User = s.ClientName, 
-                    Time = s.CreatedAt, 
-                    Type = "payment" 
+                .Select(s => new {
+                    Action = $"Sales Invoice #{s.InvoiceNo} generated",
+                    User = s.ClientName,
+                    Time = s.CreatedAt,
+                    Type = "payment"
                 })
                 .ToListAsync();
             activities.AddRange(recentSales);
 
-            // Get recent quotations
             var recentQuotes = await _context.Quotations
                 .OrderByDescending(q => q.CreatedAt)
                 .Take(3)
-                .Select(q => new { 
-                    Action = $"Quotation #{q.QuotationNumber} created for {q.CompanyName}", 
-                    User = q.CreatedBy, 
-                    Time = q.CreatedAt, 
-                    Type = "sales" 
+                .Select(q => new {
+                    Action = $"Quotation #{q.QuotationNumber} created for {q.CompanyName}",
+                    User = q.CreatedBy,
+                    Time = q.CreatedAt,
+                    Type = "sales"
                 })
                 .ToListAsync();
             activities.AddRange(recentQuotes);
@@ -139,15 +130,116 @@ namespace Digital.Api.Controllers
             });
         }
 
+        // GET: api/dashboard/hr  — HR Dashboard specific aggregations
+        [HttpGet("hr")]
+        public async Task<IActionResult> GetHRDashboard()
+        {
+            // Employee status counts
+            var totalEmployees = await _context.Employees.CountAsync();
+            var pendingIT      = await _context.Employees.CountAsync(e => e.Status == "Pending");
+            var approvedByIT   = await _context.Employees.CountAsync(e => e.Status == "Active" || e.Status == "Approved");
+            var activeUsers    = await _context.Users.CountAsync();
+            var rejected       = await _context.Employees.CountAsync(e => e.Status == "Rejected");
+            var inactive       = await _context.Employees.CountAsync(e => e.Status == "Inactive");
+
+            // Recent employee registrations (last 10)
+            var recentEmployees = await _context.Employees
+                .Include(e => e.Department)
+                .Include(e => e.Location)
+                .OrderByDescending(e => e.CreatedAt)
+                .Take(10)
+                .Select(e => new {
+                    e.Id,
+                    e.EmployeeId,
+                    e.Name,
+                    e.Email,
+                    e.Role,
+                    e.Status,
+                    DepartmentName = e.Department != null ? e.Department.Name : null,
+                    LocationName   = e.Location   != null ? e.Location.Name   : null,
+                    e.CreatedAt
+                })
+                .ToListAsync();
+
+            // Status distribution for visual breakdown
+            var statusGroups = await _context.Employees
+                .GroupBy(e => e.Status)
+                .Select(g => new { Status = g.Key, Count = g.Count() })
+                .ToListAsync();
+
+            // Location distribution
+            var locationGroups = await _context.Employees
+                .Where(e => e.LocationId != null)
+                .Include(e => e.Location)
+                .GroupBy(e => e.Location!.Name)
+                .Select(g => new { Location = g.Key, Count = g.Count() })
+                .OrderByDescending(g => g.Count)
+                .Take(6)
+                .ToListAsync();
+
+            // Department distribution
+            var deptGroups = await _context.Employees
+                .Where(e => e.DepartmentId != null)
+                .Include(e => e.Department)
+                .GroupBy(e => e.Department!.Name)
+                .Select(g => new { Department = g.Key, Count = g.Count() })
+                .OrderByDescending(g => g.Count)
+                .Take(6)
+                .ToListAsync();
+
+            // Recent pending profile update requests
+            var pendingProfileUpdates = await _context.ProfileUpdateRequests
+                .Include(r => r.Employee)
+                .Where(r => r.Status == "Pending")
+                .OrderByDescending(r => r.RequestedAt)
+                .Take(5)
+                .Select(r => new {
+                    r.Id,
+                    EmployeeName = r.Employee != null ? r.Employee.Name : "Unknown",
+                    EmployeeCode = r.Employee != null ? r.Employee.EmployeeId : null,
+                    r.FieldName,
+                    r.OldValue,
+                    r.NewValue,
+                    r.RequestedAt
+                })
+                .ToListAsync();
+
+            // Fund tracking summary
+            var totalFunds    = await _context.EmployeeFunds.CountAsync();
+            var pendingFunds  = await _context.EmployeeFunds.CountAsync(f => f.Status == "Pending");
+            var totalDisbursed = await _context.EmployeeFunds
+                .Where(f => f.Status == "Released" || f.Status == "Approved")
+                .SumAsync(f => (decimal?)f.Amount) ?? 0;
+
+            return Ok(new
+            {
+                stats = new {
+                    totalEmployees,
+                    pendingIT,
+                    approvedByIT,
+                    activeUsers,
+                    rejected,
+                    inactive
+                },
+                recentEmployees,
+                statusDistribution = statusGroups,
+                locationDistribution = locationGroups,
+                departmentDistribution = deptGroups,
+                pendingProfileUpdates,
+                fundSummary = new {
+                    totalFunds,
+                    pendingFunds,
+                    totalDisbursed
+                }
+            });
+        }
+
         private static string FormatTimeAgo(DateTime dateTime)
         {
             var span = DateTime.UtcNow - dateTime;
-            if (span.TotalMinutes < 1)
-                return "just now";
-            if (span.TotalMinutes < 60)
-                return $"{(int)span.TotalMinutes}m ago";
-            if (span.TotalHours < 24)
-                return $"{(int)span.TotalHours}h ago";
+            if (span.TotalMinutes < 1) return "just now";
+            if (span.TotalMinutes < 60) return $"{(int)span.TotalMinutes}m ago";
+            if (span.TotalHours < 24) return $"{(int)span.TotalHours}h ago";
             return $"{(int)span.TotalDays}d ago";
         }
     }

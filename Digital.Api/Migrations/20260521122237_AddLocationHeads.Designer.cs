@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260521122237_AddLocationHeads")]
+    partial class AddLocationHeads
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 470, DateTimeKind.Utc).AddTicks(199),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(6241),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 470, DateTimeKind.Utc).AddTicks(703),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(6731),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 470, DateTimeKind.Utc).AddTicks(704),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(6732),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 470, DateTimeKind.Utc).AddTicks(705),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(6733),
                             Description = "CANARA"
                         });
                 });
@@ -251,7 +254,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 469, DateTimeKind.Utc).AddTicks(8842),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(4935),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             FooterPath = "",
@@ -274,7 +277,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 469, DateTimeKind.Utc).AddTicks(9702),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(5756),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             FooterPath = "",
@@ -297,7 +300,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 21, 12, 40, 59, 469, DateTimeKind.Utc).AddTicks(9704),
+                            CreatedAt = new DateTime(2026, 5, 21, 12, 22, 36, 923, DateTimeKind.Utc).AddTicks(5757),
                             DealsIn = "",
                             Email = "support@global.com",
                             FooterPath = "",
@@ -683,173 +686,6 @@ namespace Digital.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Digital.Api.Models.EmployeeFund", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("GivenDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Purpose")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("RecordedBy")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("RefNo")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeFunds");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 15000.00m,
-                            CreatedAt = new DateTime(2026, 4, 15, 10, 0, 0, 0, DateTimeKind.Utc),
-                            EmployeeId = 1,
-                            GivenDate = new DateTime(2026, 4, 15, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Purpose = "Office Supplies & Development Kit Reimbursement",
-                            RecordedBy = "AMANTU",
-                            RefNo = "FT-948274",
-                            Status = "Approved"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 8500.00m,
-                            CreatedAt = new DateTime(2026, 5, 10, 11, 30, 0, 0, DateTimeKind.Utc),
-                            EmployeeId = 3,
-                            GivenDate = new DateTime(2026, 5, 10, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Purpose = "Client Site Travel & Accommodation Allowance",
-                            RecordedBy = "AMANTU",
-                            RefNo = "FT-201847",
-                            Status = "Released"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 12000.00m,
-                            CreatedAt = new DateTime(2026, 5, 18, 14, 15, 0, 0, DateTimeKind.Utc),
-                            EmployeeId = 102,
-                            GivenDate = new DateTime(2026, 5, 18, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Purpose = "Technical Certification Fee Reimbursement",
-                            RecordedBy = "AMANTU",
-                            RefNo = "FT-583921",
-                            Status = "Pending"
-                        });
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.EmployeeProfileUpdateRequest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("FieldName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("NewValue")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("OldValue")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("RejectionReason")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<DateTime>("RequestedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("ReviewedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ReviewedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("ProfileUpdateRequests");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EmployeeId = 1,
-                            FieldName = "Role",
-                            NewValue = "SENIOR ENGINEER",
-                            OldValue = "JUNIOR ENGINEER",
-                            RequestedAt = new DateTime(2026, 5, 19, 9, 0, 0, 0, DateTimeKind.Utc),
-                            Status = "Pending"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EmployeeId = 3,
-                            FieldName = "Qualification",
-                            NewValue = "B.Tech Civil Engineering",
-                            RequestedAt = new DateTime(2026, 5, 20, 11, 30, 0, 0, DateTimeKind.Utc),
-                            Status = "Pending"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EmployeeId = 102,
-                            FieldName = "Email",
-                            NewValue = "a.kumar@digital.com",
-                            OldValue = "anupam.kumar@digital.com",
-                            RequestedAt = new DateTime(2026, 5, 21, 8, 0, 0, 0, DateTimeKind.Utc),
-                            Status = "Pending"
-                        });
-                });
-
             modelBuilder.Entity("Digital.Api.Models.HsnCode", b =>
                 {
                     b.Property<int>("Id")
@@ -1141,55 +977,6 @@ namespace Digital.Api.Migrations
                             Title = "ELECTRICAL TECHNICIAN",
                             Wing = "ELECTRICAL"
                         });
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.PostGrouping", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PostGroupings");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.PostGroupingItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("PostGroupingId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostGroupingId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostGroupingItems");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.Project", b =>
@@ -2222,28 +2009,6 @@ namespace Digital.Api.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("Digital.Api.Models.EmployeeFund", b =>
-                {
-                    b.HasOne("Digital.Api.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.EmployeeProfileUpdateRequest", b =>
-                {
-                    b.HasOne("Digital.Api.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("Digital.Api.Models.LocationHead", b =>
                 {
                     b.HasOne("Digital.Api.Models.Employee", "Employee")
@@ -2261,25 +2026,6 @@ namespace Digital.Api.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.PostGroupingItem", b =>
-                {
-                    b.HasOne("Digital.Api.Models.PostGrouping", "PostGrouping")
-                        .WithMany("PostGroupingItems")
-                        .HasForeignKey("PostGroupingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Digital.Api.Models.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("PostGrouping");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.PurchaseInvoiceItem", b =>
@@ -2339,11 +2085,6 @@ namespace Digital.Api.Migrations
             modelBuilder.Entity("Digital.Api.Models.Location", b =>
                 {
                     b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("Digital.Api.Models.PostGrouping", b =>
-                {
-                    b.Navigation("PostGroupingItems");
                 });
 
             modelBuilder.Entity("Digital.Api.Models.PurchaseInvoice", b =>

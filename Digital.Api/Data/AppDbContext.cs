@@ -38,6 +38,15 @@ namespace Digital.Api.Data
         public DbSet<SalesInvoice> SalesInvoices { get; set; }
         public DbSet<SalesInvoiceItem> SalesInvoiceItems { get; set; }
         public DbSet<MasterData> MasterData { get; set; }
+        public DbSet<Wing> Wings { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<RoleAssignment> RoleAssignments { get; set; }
+        public DbSet<SubLocation> SubLocations { get; set; }
+        public DbSet<LocationHead> LocationHeads { get; set; }
+        public DbSet<PostGrouping> PostGroupings { get; set; }
+        public DbSet<PostGroupingItem> PostGroupingItems { get; set; }
+        public DbSet<EmployeeFund> EmployeeFunds { get; set; }
+        public DbSet<EmployeeProfileUpdateRequest> ProfileUpdateRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,14 +54,22 @@ namespace Digital.Api.Data
 
             // Seed initial data if needed
             modelBuilder.Entity<Department>().HasData(
-                new Department { Id = 1, Name = "P & P", CompanyGstNumber = "27AADCD1234A1Z1" },
-                new Department { Id = 2, Name = "CIVIL DEPARTMENT", CompanyGstNumber = "27AADCD1234A1Z1" },
-                new Department { Id = 3, Name = "IT", CompanyGstNumber = "27AADCD1234A1Z1" }
+                new Department { Id = 1, Name = "HR", Description = "DSEC", Status = true, CreatedAt = new DateTime(2025, 12, 22, 5, 57, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 2, Name = "IT", Description = "DSEC", Status = true, CreatedAt = new DateTime(2025, 12, 22, 5, 57, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 3, Name = "SALES", Description = "DESCRIPTION", Status = true, CreatedAt = new DateTime(2025, 12, 22, 5, 58, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 4, Name = "R & D", Description = "RESEARCH AND DEVELOPMENT", Status = true, CreatedAt = new DateTime(2025, 12, 22, 5, 58, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 5, Name = "P & P", Description = "PLANNING AND PRODUCTION", Status = true, CreatedAt = new DateTime(2025, 12, 22, 5, 59, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 6, Name = "ACCOUNTS", Description = "ACCOUNTS", Status = true, CreatedAt = new DateTime(2025, 12, 22, 5, 59, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" },
+                new Department { Id = 7, Name = "CIVIL DEPARTMENT", Description = "CIVIL WORK", Status = true, CreatedAt = new DateTime(2026, 4, 4, 23, 32, 0, DateTimeKind.Utc), CompanyGstNumber = "27AADCD1234A1Z1" }
             );
 
             modelBuilder.Entity<Location>().HasData(
-                new Location { Id = 1, Name = "VISAKHAPATNAM" },
-                new Location { Id = 2, Name = "JAMNAGAR" }
+                new Location { Id = 1, Name = "VISAKHAPATNAM", Description = "Main Office Location", CreatedAt = new DateTime(2025, 12, 19, 11, 0, 18, DateTimeKind.Utc) },
+                new Location { Id = 2, Name = "KARWAR", Description = "DESC", CreatedAt = new DateTime(2025, 12, 24, 2, 42, 58, DateTimeKind.Utc) },
+                new Location { Id = 3, Name = "MUMBAI", Description = "MUMBAI", CreatedAt = new DateTime(2025, 12, 30, 6, 40, 15, DateTimeKind.Utc) },
+                new Location { Id = 4, Name = "KOLKATA", Description = "WEST BENGAL", CreatedAt = new DateTime(2026, 1, 2, 6, 1, 30, DateTimeKind.Utc) },
+                new Location { Id = 5, Name = "JAMNAGAR", Description = "JAMNAGAR", CreatedAt = new DateTime(2026, 3, 31, 14, 26, 42, DateTimeKind.Utc) },
+                new Location { Id = 6, Name = "KOCHIN", Description = "KOCHIN", CreatedAt = new DateTime(2026, 3, 31, 14, 28, 28, DateTimeKind.Utc) }
             );
 
             modelBuilder.Entity<CompanyGst>().HasData(
@@ -88,6 +105,157 @@ namespace Digital.Api.Data
                 new Role { Id = 17, Name = "UNDER TRAINING", DisplayName = "UNDER TRAINING", Description = "DESCRIPTION" },
                 new Role { Id = 18, Name = "User", DisplayName = "User", Description = "Default user access" }
             );
+
+            modelBuilder.Entity<Wing>().HasData(
+                new Wing { Id = 1, Name = "ELECTRICAL", Description = "DESC", Status = true, UserCount = 0, CreatedAt = new DateTime(2025, 12, 22, 5, 56, 0, DateTimeKind.Utc) },
+                new Wing { Id = 2, Name = "CIVIL", Description = "DEC", Status = true, UserCount = 0, CreatedAt = new DateTime(2025, 12, 22, 5, 56, 0, DateTimeKind.Utc) }
+            );
+
+            modelBuilder.Entity<Post>().HasData(
+                new Post { Id = 1, GroupId = 12, GroupName = "JUNIOR ENGINEER", Wing = "ELECTRICAL", Dept = "P & P", Title = "SOFTWARE DEVELOPER3", Desc = "DEVELOPER", Date = new DateTime(2026, 4, 30, 0, 0, 0, DateTimeKind.Utc) },
+                new Post { Id = 2, GroupId = 15, GroupName = "TECHNICIAN", Wing = "CIVIL", Dept = "P & P", Title = "Welder", Desc = "Welder", Date = new DateTime(2026, 4, 13, 0, 0, 0, DateTimeKind.Utc) },
+                new Post { Id = 3, GroupId = 14, GroupName = "ASSISTANT SUPERVISOR", Wing = "ELECTRICAL", Dept = "P & P", Title = "DEE HQ OFFICE ADMINISTRATOR", Desc = "DEE HQ OFFICE ADMINISTRATOR", Date = new DateTime(2026, 4, 4, 0, 0, 0, DateTimeKind.Utc) },
+                new Post { Id = 4, GroupId = 15, GroupName = "TECHNICIAN", Wing = "ELECTRICAL", Dept = "P & P", Title = "ELECTRICAL TECHNICIAN", Desc = "ELECTRICAL TECHNICIAN", Date = new DateTime(2026, 4, 3, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            modelBuilder.Entity<RoleAssignment>().HasData(
+                new RoleAssignment { Id = 1, GroupId = 12, GroupName = "JUNIOR ENGINEER", PostId = 1, PostTitle = "SOFTWARE DEVELOPER3", Wing = "ELECTRICAL", Dept = "P & P", LocationId = 1, LocationName = "VISAKHAPATNAM", EmployeeId = 1, EmployeeName = "TEJESH GUDLA", EmployeeCode = "DEE300426132", Desc = "DEVELOPER", Date = new DateTime(2026, 4, 30, 0, 0, 0, DateTimeKind.Utc) },
+                new RoleAssignment { Id = 2, GroupId = 15, GroupName = "TECHNICIAN", PostId = 2, PostTitle = "Welder", Wing = "CIVIL", Dept = "P & P", LocationId = 1, LocationName = "VISAKHAPATNAM", EmployeeId = 2, EmployeeName = "GANDIBOINA GOWRI PRASAD", EmployeeCode = "DEE130426131", Desc = "Welder", Date = new DateTime(2026, 4, 13, 0, 0, 0, DateTimeKind.Utc) },
+                new RoleAssignment { Id = 3, GroupId = 14, GroupName = "ASSISTANT SUPERVISOR", PostId = 3, PostTitle = "DEE HQ OFFICE ADMINISTRATOR", Wing = "ELECTRICAL", Dept = "P & P", LocationId = 1, LocationName = "VISAKHAPATNAM", EmployeeId = 3, EmployeeName = "SAYAD SARFARAZ", EmployeeCode = "DEE040426129", Desc = "DEE HQ OFFICE ADMINISTRATIVE", Date = new DateTime(2026, 4, 4, 0, 0, 0, DateTimeKind.Utc) },
+                new RoleAssignment { Id = 4, GroupId = 15, GroupName = "TECHNICIAN", PostId = 4, PostTitle = "ELECTRICAL INTEGRATION", Wing = "ELECTRICAL", Dept = "P & P", LocationId = 1, LocationName = "VISAKHAPATNAM", EmployeeId = 4, EmployeeName = "KANDREGULA KOTESWARA RAO", EmployeeCode = "DEE030426128", Desc = "desc", Date = new DateTime(2026, 4, 3, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            modelBuilder.Entity<SubLocation>().HasData(
+                new SubLocation { Id = 1, LocationId = 4, Name = "GRSE FOJ", Description = "GRSE FOJ", CreatedAt = new DateTime(2026, 4, 2, 0, 0, 0, DateTimeKind.Utc) },
+                new SubLocation { Id = 2, LocationId = 1, Name = "INS DEGA BLD", Description = "AFLS MUSTERING POINT", CreatedAt = new DateTime(2026, 3, 28, 0, 0, 0, DateTimeKind.Utc) },
+                new SubLocation { Id = 3, LocationId = 3, Name = "LION GATE", Description = "N/A", CreatedAt = new DateTime(2025, 12, 30, 0, 0, 0, DateTimeKind.Utc) }
+            );
+
+            // Configure unique index for LocationHead to satisfy one-head-per-location constraint
+            modelBuilder.Entity<LocationHead>()
+                .HasIndex(lh => lh.LocationId)
+                .IsUnique();
+
+            // Seed employees to map original mock location heads
+            modelBuilder.Entity<Employee>().HasData(
+                new Employee
+                {
+                    Id = 101,
+                    EmployeeId = "DEE010126115",
+                    Name = "RANJAN YADAV",
+                    Email = "ranjan.yadav@digital.com",
+                    LocationId = 1,
+                    Role = "Location Head",
+                    Status = "Active",
+                    CreatedAt = new DateTime(2026, 3, 31, 13, 2, 0, DateTimeKind.Utc)
+                },
+                new Employee
+                {
+                    Id = 102,
+                    EmployeeId = "DEE251225102",
+                    Name = "ANUPAM KUMAR",
+                    Email = "anupam.kumar@digital.com",
+                    LocationId = 3,
+                    Role = "Location Head",
+                    Status = "Active",
+                    CreatedAt = new DateTime(2025, 12, 30, 6, 40, 15, DateTimeKind.Utc)
+                },
+                new Employee
+                {
+                    Id = 103,
+                    EmployeeId = "DEE251225103",
+                    Name = "SANJAY KUMAR MAHATO",
+                    Email = "sanjay.mahato@digital.com",
+                    LocationId = 5,
+                    Role = "Location Head",
+                    Status = "Active",
+                    CreatedAt = new DateTime(2026, 3, 31, 14, 26, 42, DateTimeKind.Utc)
+                }
+            );
+
+            // Seed location head assignments
+            modelBuilder.Entity<LocationHead>().HasData(
+                new LocationHead { Id = 1, LocationId = 1, EmployeeId = 101, AssignedAt = new DateTime(2026, 3, 31, 13, 2, 0, DateTimeKind.Utc) },
+                new LocationHead { Id = 2, LocationId = 3, EmployeeId = 102, AssignedAt = new DateTime(2026, 4, 1, 4, 39, 0, DateTimeKind.Utc) },
+                new LocationHead { Id = 3, LocationId = 2, EmployeeId = 102, AssignedAt = new DateTime(2026, 4, 1, 4, 39, 0, DateTimeKind.Utc) },
+                new LocationHead { Id = 4, LocationId = 5, EmployeeId = 103, AssignedAt = new DateTime(2026, 4, 3, 4, 0, 0, DateTimeKind.Utc) },
+                new LocationHead { Id = 5, LocationId = 4, EmployeeId = 101, AssignedAt = new DateTime(2026, 4, 3, 4, 15, 0, DateTimeKind.Utc) }
+            );
+
+            // Seed starting employee funds
+            modelBuilder.Entity<EmployeeFund>().HasData(
+                new EmployeeFund
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    Amount = 15000.00m,
+                    GivenDate = new DateTime(2026, 4, 15, 0, 0, 0, DateTimeKind.Utc),
+                    Purpose = "Office Supplies & Development Kit Reimbursement",
+                    Status = "Approved",
+                    RefNo = "FT-948274",
+                    RecordedBy = "AMANTU",
+                    CreatedAt = new DateTime(2026, 4, 15, 10, 0, 0, DateTimeKind.Utc)
+                },
+                new EmployeeFund
+                {
+                    Id = 2,
+                    EmployeeId = 3,
+                    Amount = 8500.00m,
+                    GivenDate = new DateTime(2026, 5, 10, 0, 0, 0, DateTimeKind.Utc),
+                    Purpose = "Client Site Travel & Accommodation Allowance",
+                    Status = "Released",
+                    RefNo = "FT-201847",
+                    RecordedBy = "AMANTU",
+                    CreatedAt = new DateTime(2026, 5, 10, 11, 30, 0, DateTimeKind.Utc)
+                },
+                new EmployeeFund
+                {
+                    Id = 3,
+                    EmployeeId = 102,
+                    Amount = 12000.00m,
+                    GivenDate = new DateTime(2026, 5, 18, 0, 0, 0, DateTimeKind.Utc),
+                    Purpose = "Technical Certification Fee Reimbursement",
+                    Status = "Pending",
+                    RefNo = "FT-583921",
+                    RecordedBy = "AMANTU",
+                    CreatedAt = new DateTime(2026, 5, 18, 14, 15, 0, DateTimeKind.Utc)
+                }
+            );
+
+            // Seed sample profile update requests (pending, for demonstration)
+            modelBuilder.Entity<EmployeeProfileUpdateRequest>().HasData(
+                new EmployeeProfileUpdateRequest
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    FieldName = "Role",
+                    OldValue = "JUNIOR ENGINEER",
+                    NewValue = "SENIOR ENGINEER",
+                    Status = "Pending",
+                    RequestedAt = new DateTime(2026, 5, 19, 9, 0, 0, DateTimeKind.Utc)
+                },
+                new EmployeeProfileUpdateRequest
+                {
+                    Id = 2,
+                    EmployeeId = 3,
+                    FieldName = "Qualification",
+                    OldValue = null,
+                    NewValue = "B.Tech Civil Engineering",
+                    Status = "Pending",
+                    RequestedAt = new DateTime(2026, 5, 20, 11, 30, 0, DateTimeKind.Utc)
+                },
+                new EmployeeProfileUpdateRequest
+                {
+                    Id = 3,
+                    EmployeeId = 102,
+                    FieldName = "Email",
+                    OldValue = "anupam.kumar@digital.com",
+                    NewValue = "a.kumar@digital.com",
+                    Status = "Pending",
+                    RequestedAt = new DateTime(2026, 5, 21, 8, 0, 0, DateTimeKind.Utc)
+                }
+            );
         }
+
     }
 }

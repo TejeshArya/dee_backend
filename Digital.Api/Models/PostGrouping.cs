@@ -1,19 +1,23 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Digital.Api.Models
 {
-    public class Location
+    public class PostGrouping
     {
+        [Key]
         public int Id { get; set; }
-        
+
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string Name { get; set; } = string.Empty;
 
+        [MaxLength(500)]
         public string Description { get; set; } = string.Empty;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+
+        public ICollection<PostGroupingItem> PostGroupingItems { get; set; } = new List<PostGroupingItem>();
     }
 }
