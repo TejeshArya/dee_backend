@@ -47,6 +47,7 @@ namespace Digital.Api.Data
         public DbSet<PostGroupingItem> PostGroupingItems { get; set; }
         public DbSet<EmployeeFund> EmployeeFunds { get; set; }
         public DbSet<EmployeeProfileUpdateRequest> ProfileUpdateRequests { get; set; }
+        public DbSet<EmployeeFamilyMember> EmployeeFamilyMembers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

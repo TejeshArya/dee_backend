@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Digital.Api.Data;
-using Digital.Api.Models;
-
+using Digital.Api.Models;     
 namespace Digital.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -57,7 +56,7 @@ namespace Digital.Api.Controllers
 
             return CreatedAtAction(nameof(GetRole), new { id = role.Id }, role);
         }
-
+      
         // POST: api/roles/edit
         [HttpPost("edit")]
         public async Task<IActionResult> EditRole(Role role)
