@@ -35,7 +35,9 @@ namespace Digital.Api.Controllers
                     DepartmentName = e.Department != null ? e.Department.Name : null,
                     LocationName   = e.Location   != null ? e.Location.Name   : null,
                     FamilyMembersCount = e.FamilyMembers != null ? e.FamilyMembers.Count : 0,
-                    e.CreatedAt
+                    e.CreatedAt,
+                    e.ApprovedAt,
+                    e.ApprovedBy
                 })
                 .ToListAsync();
         }
@@ -82,7 +84,7 @@ namespace Digital.Api.Controllers
                 DepartmentName = e.Department != null ? e.Department.Name : null,
                 LocationName   = e.Location   != null ? e.Location.Name   : null,
                 FamilyMembers  = e.FamilyMembers,
-                e.CreatedAt, e.UpdatedAt
+                e.CreatedAt, e.UpdatedAt, e.ApprovedAt, e.ApprovedBy
             });
         }
 
@@ -190,7 +192,7 @@ namespace Digital.Api.Controllers
         // POST: api/Employees/approve/{id}
         // ─────────────────────────────────────────
         [HttpPost("approve/{id}")]
-        public async Task<IActionResult> ApproveEmployee(int id)
+        public async Task<IActionResult> ApproveEmployee(int id, [FromQuery] string? approvedBy)
         {
             var employee = await _context.Employees.FindAsync(id);
             if (employee == null) return NotFound();
@@ -200,6 +202,8 @@ namespace Digital.Api.Controllers
             employee.EmployeeId = $"DEE{dateStr}{approvedCount + 101}";
             employee.Status     = "Active";
             employee.UpdatedAt  = DateTime.UtcNow;
+            employee.ApprovedAt  = DateTime.UtcNow;
+            employee.ApprovedBy  = approvedBy ?? "IT Admin";
 
             var user = new User
             {

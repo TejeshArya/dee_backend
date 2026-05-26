@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260526105615_AddEmployeeApprovedAt")]
+    partial class AddEmployeeApprovedAt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(3877),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(2312),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(4480),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(2899),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(4482),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(2900),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(4483),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(2902),
                             Description = "CANARA"
                         });
                 });
@@ -251,7 +254,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(2160),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(889),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             FooterPath = "",
@@ -274,7 +277,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(3192),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(1756),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             FooterPath = "",
@@ -297,7 +300,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 26, 11, 1, 48, 428, DateTimeKind.Utc).AddTicks(3224),
+                            CreatedAt = new DateTime(2026, 5, 26, 10, 56, 14, 248, DateTimeKind.Utc).AddTicks(1758),
                             DealsIn = "",
                             Email = "support@global.com",
                             FooterPath = "",
@@ -607,9 +610,6 @@ namespace Digital.Api.Migrations
 
                     b.Property<DateTime?>("ApprovedAt")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ApprovedBy")
-                        .HasColumnType("text");
 
                     b.Property<string>("BankName")
                         .HasColumnType("text");
