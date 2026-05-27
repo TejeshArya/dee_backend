@@ -16,6 +16,7 @@ namespace Digital.Api.Data
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeRequiredRule> EmployeeRequiredRules { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Project> Projects { get; set; }
@@ -254,6 +255,45 @@ namespace Digital.Api.Data
                     NewValue = "a.kumar@digital.com",
                     Status = "Pending",
                     RequestedAt = new DateTime(2026, 5, 21, 8, 0, 0, DateTimeKind.Utc)
+                }
+            );
+
+            modelBuilder.Entity<EmployeeRequiredRule>().HasData(
+                new EmployeeRequiredRule
+                {
+                    Id = 1,
+                    FullName = true,
+                    OfficialEmail = true,
+                    EmployeeCode = false,
+                    DateOfJoining = true,
+                    Department = true,
+                    Location = false,
+                    Designation = true,
+                    AnnualSalary = false,
+                    CoreQualification = true,
+                    Remarks = false,
+                    DateOfBirth = true,
+                    Gender = true,
+                    MaritalStatus = true,
+                    BloodGroup = true,
+                    Religion = false,
+                    Category = true,
+                    MobileNumber = true,
+                    AlternateNumber = false,
+                    CurrentAddress = true,
+                    PermanentAddress = true,
+                    Photo = true,
+                    AadharNumber = true,
+                    PanNumber = true,
+                    UanNumber = false,
+                    EsicNumber = false,
+                    PassportNumber = false,
+                    PvcNumber = false,
+                    BankDetails = true,
+                    EmergencyName = true,
+                    EmergencyPhone = true,
+                    EmergencyRelation = true,
+                    NomineeDetails = false
                 }
             );
         }

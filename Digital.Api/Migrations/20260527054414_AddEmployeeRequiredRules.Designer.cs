@@ -3,6 +3,7 @@ using System;
 using Digital.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Digital.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260527054414_AddEmployeeRequiredRules")]
+    partial class AddEmployeeRequiredRules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace Digital.Api.Migrations
                         {
                             Id = 1,
                             BankName = "STATE BANK OF INDIA",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(8176),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 607, DateTimeKind.Utc).AddTicks(9458),
                             Description = "SBI"
                         },
                         new
                         {
                             Id = 2,
                             BankName = "HDFC BANK",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(8726),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 608, DateTimeKind.Utc).AddTicks(166),
                             Description = "HDFC"
                         },
                         new
                         {
                             Id = 3,
                             BankName = "ICICI BANK",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(8729),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 608, DateTimeKind.Utc).AddTicks(168),
                             Description = "ICICI"
                         },
                         new
                         {
                             Id = 4,
                             BankName = "CANARA BANK",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(8730),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 608, DateTimeKind.Utc).AddTicks(169),
                             Description = "CANARA"
                         });
                 });
@@ -251,7 +254,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "DIGITAL NEW ENTERPRISES",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(6644),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 607, DateTimeKind.Utc).AddTicks(6886),
                             DealsIn = "",
                             Email = "contact@digital.com",
                             FooterPath = "",
@@ -274,7 +277,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "TECH SOLUTIONS LTD",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(7563),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 607, DateTimeKind.Utc).AddTicks(8273),
                             DealsIn = "",
                             Email = "info@techsolutions.com",
                             FooterPath = "",
@@ -297,7 +300,7 @@ namespace Digital.Api.Migrations
                             Color = "",
                             CompanyAddress = "",
                             CompanyName = "GLOBAL LOGISTICS CORP",
-                            CreatedAt = new DateTime(2026, 5, 27, 5, 57, 28, 624, DateTimeKind.Utc).AddTicks(7566),
+                            CreatedAt = new DateTime(2026, 5, 27, 5, 44, 13, 607, DateTimeKind.Utc).AddTicks(8276),
                             DealsIn = "",
                             Email = "support@global.com",
                             FooterPath = "",
@@ -1015,67 +1018,22 @@ namespace Digital.Api.Migrations
                     b.Property<bool>("CoreQualification")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("CurrentAddress")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("DateOfBirth")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("DateOfJoining")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Department")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Designation")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("EmergencyName")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("EmergencyPhone")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("EmergencyRelation")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("EmployeeCode")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("EsicNumber")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("FullName")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Gender")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("Location")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("MaritalStatus")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("MobileNumber")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("NomineeDetails")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("OfficialEmail")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("PanNumber")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("PassportNumber")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("PermanentAddress")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Photo")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("PvcNumber")
@@ -1105,27 +1063,12 @@ namespace Digital.Api.Migrations
                             BloodGroup = true,
                             Category = true,
                             CoreQualification = true,
-                            CurrentAddress = true,
-                            DateOfBirth = true,
-                            DateOfJoining = true,
-                            Department = true,
-                            Designation = true,
-                            EmergencyName = true,
-                            EmergencyPhone = true,
-                            EmergencyRelation = true,
                             EmployeeCode = false,
                             EsicNumber = false,
-                            FullName = true,
-                            Gender = true,
                             Location = false,
-                            MaritalStatus = true,
-                            MobileNumber = true,
                             NomineeDetails = false,
-                            OfficialEmail = true,
                             PanNumber = true,
                             PassportNumber = false,
-                            PermanentAddress = true,
-                            Photo = true,
                             PvcNumber = false,
                             Religion = false,
                             Remarks = false,
